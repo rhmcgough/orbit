@@ -22,6 +22,6 @@ npm run dev
 
 ## Contributors
 * [Joshua Larracas](https://github.com/jlarracas310)
-Monica Soliman
-Gilbert Cervantes
+* [Monica Soliman](https://github.com/monica-ss1)
+* [Gilbert Cervantes](https://github.com/GilbertD23)
 * [Ryan McGough](https://github.com/rhmcgough/)
