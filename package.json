@@ -1,0 +1,24 @@
+{
+  "name": "orbit",
+  "version": "1.0.0",
+  "description": "Orbit is a map of \"third places\", defined as social environments away from home and work. Orbit aims to help its users dicvoer, share, and provide their thoughts on third places local and abroad. This app uses a map-based interface and leverages community engagement to provide its users with a meaningful way of finding and connecting with others in the comfort of their own third place.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhmcgough/orbit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhmcgough/orbit/issues"
+  },
+  "homepage": "https://github.com/rhmcgough/orbit#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "firebase": "^12.18.0"
+  }
+}
