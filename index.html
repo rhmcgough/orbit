@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit - Third Place Locator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Orbit</h1>
+    <nav>
+      <a href="#explore">Explore</a>
+      <a href="#about">About</a>
+      <button id="login-button">Log In</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" id="about">
+      <h2>Find your next third place</h2>
+      <p>Discover local places where people can enjoy hobbies, attend events, and meet their community.</p>
+    </section>
+
+    <section id="explore">
+      <div class="section-heading">
+        <div>
+          <h2>Explore nearby places</h2>
+          <p>Sample locations around Fullerton</p>
+        </div>
+        <button id="show-form-button">Add a Place</button>
+      </div>
+
+      <label class="search-label" for="search">Search locations</label>
+      <input id="search" type="search" placeholder="Search by name or category">
+
+      <div class="explore-layout">
+        <div class="place-list" id="place-list"></div>
+
+        <div class="map-placeholder">
+          <h3>map here</h3>
+          <p>we will connect a map later</p>
+          <span class="pin pin-one">1</span>
+          <span class="pin pin-two">2</span>
+          <span class="pin pin-three">3</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="add-section" id="add-section" hidden>
+      <h2>Add a new place</h2>
+      <form id="place-form">
+        <label for="place-name">Place name</label>
+        <input id="place-name" required>
+
+        <label for="place-category">Category</label>
+        <select id="place-category" required>
+          <option value="">Select a category</option>
+          <option>Outdoors</option>
+          <option>Books</option>
+          <option>Coffee</option>
+          <option>Community</option>
+        </select>
+
+        <label for="place-address">Address</label>
+        <input id="place-address" required>
+
+        <label for="place-description">Description</label>
+        <textarea id="place-description" rows="4"></textarea>
+
+        <div class="form-buttons">
+          <button type="submit">Submit</button>
+          <button type="button" id="cancel-button" class="secondary">Cancel</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Orbit CPSC491 Project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
