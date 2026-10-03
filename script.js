@@ -22,6 +22,7 @@ const places = [
 const placeList = document.querySelector("#place-list");
 const searchInput = document.querySelector("#search");
 const addSection = document.querySelector("#add-section");
+const apiBaseUrl = window.ORBIT_API_BASE_URL || "";
 
 function displayPlaces(searchText = "") {
   const query = searchText.toLowerCase();
@@ -61,8 +62,36 @@ document.querySelector("#place-form").addEventListener("submit", (event) => {
   addSection.hidden = true;
 });
 
-document.querySelector("#login-button").addEventListener("click", () => {
-  alert("can't do this yet! try later pls");
-});
+// the normal Login and Register links stay visible
+async function displayAuthenticationStatus() {
+  const authControls = document.querySelector("#auth-controls");
+
+  try {
+    const response = await fetch(`${apiBaseUrl}/api/auth/me`, {
+      credentials: "include"
+    });
+
+    if (!response.ok) return;
+
+    const result = await response.json();
+    if (!result.user) return;
+
+    authControls.innerHTML = `
+      <span class="username-display">Hello, ${result.user.username}</span>
+      <button id="logout-button" type="button">Log Out</button>
+    `;
+
+    document.querySelector("#logout-button").addEventListener("click", async () => {
+      await fetch(`${apiBaseUrl}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include"
+      });
+      window.location.reload();
+    });
+  } catch (error) {
+    console.log("need to connect still!");
+  }
+}
 
 displayPlaces();
+displayAuthenticationStatus();
