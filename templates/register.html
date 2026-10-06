@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Orbit</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/script.js"></script>
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <a class="auth-brand" href="index.html">Orbit</a>
+    <h1>Create an account</h1>
+    <p>Join Orbit and discover third places near you.</p>
+
+    <form id="auth-form" data-mode="register">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username"
+             required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+">
+      <small>Use 3-30 letters numbers or underscores</small>
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password"
+             autocomplete="new-password" required minlength="8" maxlength="128">
+      <small>use at least 8 characters</small>
+
+      <label for="confirm-password">Confirm password</label>
+      <input id="confirm-password" name="confirmPassword" type="password"
+             autocomplete="new-password" required minlength="8" maxlength="128">
+
+      <p class="form-message" id="form-message" role="alert"></p>
+      <button type="submit">Create Account</button>
+    </form>
+
+    <p class="auth-switch">Already registered? <a href="login.html">Log in</a></p>
+    <a class="back-link" href="index.html">Back to Orbit</a>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

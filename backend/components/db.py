@@ -1,9 +1,7 @@
 # db.py
 # initializes the database for orbit.
 
-import asyncio
-import aiosqlite
-import os
+import sqlite3
 import sys
 
 
@@ -17,10 +15,14 @@ SCHEMA_STATEMENTS = [
     """
     CREATE TABLE IF NOT EXISTS users (
         uid             TEXT PRIMARY KEY,
+        email_address   TEXT NOT NULL UNIQUE,
+        password        VARCHAR (255) NOT NULL,
         display_name    TEXT NOT NULL,
         bio             TEXT,
         interests       TEXT DEFAULT '[]',
-        created_at      TEXT NOT NULL DEFAULT (datetime('now'))
+        created_at      TEXT NOT NULL DEFAULT (datetime('now')),
+        failed_attempts INTEGER NOT NULL DEFAULT 0,
+        locked_until    TEXT
     );
     """,
 
@@ -103,15 +105,18 @@ SCHEMA_STATEMENTS = [
 # Initializes the database using the 
 # schema statements above.
 # =====================================
-async def init_db():
-    try: 
-        async with aiosqlite.connect("orbit.db") as db:
+def init_db():
+    conn = sqlite3.connect("orbit.db")
+    try:
+        try:
             for i in SCHEMA_STATEMENTS:
-                await db.execute(i)
-            await db.commit()
-        print("[db.py] Schema initialized successfully\n")
-        
-    except aiosqlite.Error as e:
+                conn.execute(i)
+            conn.commit()
+        finally:
+            conn.close()
+            print("[db.py] Schema initialized successfully\n")
+    
+    except sqlite3.Error as e:
         print(f"[db.py] Database error: '{e}',\n exiting...")
         sys.exit(1)
 
@@ -120,4 +125,4 @@ async def init_db():
 # Entry Point, please don't touch this!
 # =====================================
 if __name__ == "__main__":
-    asyncio.run(init_db())
+    init_db()

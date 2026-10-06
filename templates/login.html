@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In - Orbit</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <a class="auth-brand" href="index.html">Orbit</a>
+    <h1>Log in</h1>
+    <p>Welcome back to your local community.</p>
+
+    <form id="auth-form" data-mode="login">
+      <label for="username">Username</label>
+      <input id="username" name="username" autocomplete="username"
+             required minlength="3" maxlength="30">
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password"
+             autocomplete="current-password" required minlength="8" maxlength="128">
+
+      <p class="form-message" id="form-message" role="alert"></p>
+      <button type="submit">Log In</button>
+    </form>
+
+    <p class="auth-switch">Need an account? <a href="register.html">Register</a></p>
+    <a class="back-link" href="index.html">Back to Orbit</a>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
