@@ -6,7 +6,7 @@
 import sqlite3
 import hashlib
 import random
-from flask_auth_api import Flask, render_template, request, url_for, session, redirect
+from flask import Flask, render_template, request, url_for, session, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
 
