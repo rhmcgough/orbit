@@ -1,6 +1,9 @@
 # References:
 # https://www.geeksforgeeks.org/python/how-to-add-authentication-to-your-app-with-flask-login/
 # https://www.youtube.com/watch?v=3NEzo3CfbPg
+# - Flask JSON Formatting: https://flask.palletsprojects.com/en/2.3.x/api/#flask.json.jsonify
+# - SQLite3 Python Integration: https://docs.python.org/3/library/sqlite3.html
+# - Flask-CORS documentation: https://flask-cors.readthedocs.io/en/latest/
 
 
 import sqlite3
@@ -187,11 +190,48 @@ def login():
       return render_template("login.html", error="Invalid password")
     
 
-@app.route("/logout")
-@login_required
-def logout():
-  logout_user()
-  return redirect("/login")
+# =====================================
+# Location API
+# =====================================
+
+@app.route('/api/locations', methods=['GET'])
+def get_locations():
+    with db() as conn:
+        cur = conn.cursor()
+        cur.execute('''
+            CREATE TABLE IF NOT EXISTS locations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                category TEXT NOT NULL,
+                address TEXT,
+                description TEXT,
+                status TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            )
+        ''')
+        cur.execute("SELECT * FROM locations")
+        rows = cur.fetchall()
+        return jsonify([dict(row) for row in rows])
+
+@app.route('/api/locations', methods=['POST'])
+def add_location():
+    data = request.get_json() or {}
+    with db() as conn:
+        cur = conn.cursor()
+        cur.execute('''
+            INSERT INTO locations (name, category, address, description, status, created_at)
+            VALUES (?, ?, ?, ?, 'active', date('now'))
+        ''', (
+            data.get('name', 'Unknown'),
+            data.get('category', 'Uncategorized'),
+            data.get('address', ''),
+            data.get('description', '')
+        ))
+        conn.commit()
+    return jsonify({"message": "Location added successfully"}), 201
+
+if __name__ == '__main__':
+    app.run(host=SERVER_IP, port=SERVER_PORT, debug=True)
 
 
 
