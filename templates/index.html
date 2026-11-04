@@ -29,7 +29,7 @@
       <div class="section-heading">
         <div>
           <h2>Explore nearby places</h2>
-          <p>Sample locations around Fullerton</p>
+          <p id="explore-subtitle">Loading places...</p>
         </div>
         <button id="show-form-button">Add a Place</button>
       </div>
@@ -69,7 +69,7 @@
         <input id="place-address" required>
 
         <label for="place-description">Description</label>
-        <textarea id="place-description" rows="4"></textarea>
+ <textarea id="place-description" rows="4"></textarea><p class="form-message" id="place-form-message" role="alert"></p>
 
         <div class="form-buttons">
           <button type="submit">Submit</button>
