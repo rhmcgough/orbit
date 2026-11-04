@@ -22,7 +22,6 @@ const places = [
 const placeList = document.querySelector("#place-list");
 const searchInput = document.querySelector("#search");
 const addSection = document.querySelector("#add-section");
-const apiBaseUrl = window.ORBIT_API_BASE_URL || "";
 
 function displayPlaces(searchText = "") {
   const query = searchText.toLowerCase();
@@ -62,34 +61,33 @@ document.querySelector("#place-form").addEventListener("submit", (event) => {
   addSection.hidden = true;
 });
 
-// the normal Login and Register links stay visible
+// Logged out: the normal Login and Register links stay visible.
+// Logged in: swap them for a greeting and a Log Out button.
 async function displayAuthenticationStatus() {
   const authControls = document.querySelector("#auth-controls");
 
   try {
-    const response = await fetch(`${apiBaseUrl}/api/auth/me`, {
-      credentials: "include"
-    });
-
+    const response = await fetch("/api/auth/me", { credentials: "same-origin" });
     if (!response.ok) return;
 
     const result = await response.json();
     if (!result.user) return;
 
-    authControls.innerHTML = `
-      <span class="username-display">Hello, ${result.user.username}</span>
-      <button id="logout-button" type="button">Log Out</button>
-    `;
+    const greeting = document.createElement("span");
+    greeting.className = "username-display";
+    greeting.textContent = `Hello, ${result.user.username}`;
 
-    document.querySelector("#logout-button").addEventListener("click", async () => {
-      await fetch(`${apiBaseUrl}/api/auth/logout`, {
-        method: "POST",
-        credentials: "include"
-      });
+    const logoutButton = document.createElement("button");
+    logoutButton.type = "button";
+    logoutButton.textContent = "Log Out";
+    logoutButton.addEventListener("click", async () => {
+      await fetch("/api/auth/logout", { method: "POST", credentials: "same-origin" });
       window.location.reload();
     });
+
+    authControls.replaceChildren(greeting, logoutButton);
   } catch (error) {
-    console.log("need to connect still!");
+    console.log("Could not reach the server to check login status.");
   }
 }
 
