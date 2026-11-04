@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register - Orbit</title>
   <link rel="stylesheet" href="/static/style.css">
-  <script src="/static/script.js"></script>
 </head>
 <body class="auth-page">
   <main class="auth-card">
-    <a class="auth-brand" href="index.html">Orbit</a>
+    <a class="auth-brand" href="/">Orbit</a>
     <h1>Create an account</h1>
     <p>Join Orbit and discover third places near you.</p>
 
-    <form id="auth-form" data-mode="register">
+    <form id="auth-form" data-mode="register" method="POST" action="/register">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+
       <label for="username">Username</label>
       <input id="username" name="username" autocomplete="username"
              required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+">
@@ -28,15 +30,15 @@
       <input id="confirm-password" name="confirmPassword" type="password"
              autocomplete="new-password" required minlength="8" maxlength="128">
 
-      <p class="form-message" id="form-message" role="alert"></p>
+      <p class="form-message" id="form-message" role="alert">{{ error or "" }}</p>
       <button type="submit">Create Account</button>
     </form>
 
-    <p class="auth-switch">Already registered? <a href="login.html">Log in</a></p>
-    <a class="back-link" href="index.html">Back to Orbit</a>
+    <p class="auth-switch">Already registered? <a href="/login">Log in</a></p>
+    <a class="back-link" href="/">Back to Orbit</a>
   </main>
 
-  <script src="config.js"></script>
-  <script src="auth.js"></script>
+  <script src="/static/auth.js"></script>
 </body>
 </html>
+
