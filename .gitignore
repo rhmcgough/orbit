@@ -2,7 +2,9 @@
 # Node.js standard .gitignore
 # ===========================
 
-
+# Orbit specific
+.DS_Store
+.DS_Store/
 orbit.db
 
 # Logs
